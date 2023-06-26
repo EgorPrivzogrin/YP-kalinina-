@@ -1,0 +1,55 @@
+﻿<Window x:Class="YP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="My Application" Height="530" Width="1289">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+            <Label Content="Найти по фамилии:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="searchTextBox" Width="150" Margin="0,0,10,0"/>
+            <Button Content="Найти" Margin="0,0,10,0"/>
+            <Button Content="Добавить" Margin="0,0,10,0" Click="Button_Click"/>
+            <Button Content="Удалить" Margin="0,0,10,0" Click="Button_Click_1"/>
+        </StackPanel>
+        <DataGrid 
+            MouseDoubleClick="ListBox_MouseDoubleClick"
+            x:Name="dataGrid" Grid.Row="1" Margin="10"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedEnrollee,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"
+                ItemsSource="{Binding Enrollees, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Gender}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker Grid.Row="5" 
+                                        Grid.Column="1" 
+                                        Name="BirthdayTextbox"
+                                        SelectedDate ="{Binding DateOfBirth}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Гражданство" Binding="{Binding Citizenship}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Место проживания" Binding="{Binding Address}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Образование" Binding="{Binding Education}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Средний балл аттестата" Binding="{Binding Gpa}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="СНИЛС" Binding="{Binding Snils}" Width="Auto" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Справка об инвалидности" Binding="{Binding Disability}" Width="Auto" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Сиротство" Binding="{Binding Ward}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Специальность" Binding="{Binding Speciality}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Бюджет или платное обучение" Binding="{Binding IsBudget}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Зачислен" Binding="{Binding IsEnlisted}" Width="Auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Дата приема" Binding="{Binding YearOfAdmission}" Width="Auto" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
